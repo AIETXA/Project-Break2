@@ -1,0 +1,26 @@
+{
+  "name": "project-break2",
+  "version": "1.0.0",
+  "description": "Estructura de archivos En este ejercicio solo vamos a crear la estructura de carpetas y archivos que vamos a necesitar para el proyecto.  No tienes que implementar lógica, ni levantar servidor, solo crear la estructura en VSC y subir tu repositorio.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AIETXA/Project-Break2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AIETXA/Project-Break2/issues"
+  },
+  "homepage": "https://github.com/AIETXA/Project-Break2#readme",
+  "dependencies": {
+    "dotenv": "16.5.0",
+    "express": "5.1.0",
+    "mongoose": "8.15.1"
+  }
+}
