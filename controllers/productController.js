@@ -1,7 +1,22 @@
 const Product = require('../models/Product.js');
+const baseHtml = require('../helpers/baseHtml.js');
+const getNavBar = require('../helpers/getNavBar.js');
+const getProductCards = require('../helpers/template.js');
 
-/*showProducts: Devuelve la vista con todos los productos.
 
+
+
+
+//showProducts: Devuelve la vista con todos los productos.
+
+const showProducts = async (req, res) => {
+  const products = await Product.find();
+  const productCards = getProductCards(products);
+  const html = baseHtml + getNavBar() + productCards;
+  res.send(html);
+};
+    
+/*
 showProductById: Devuelve la vista con el detalle de un producto.
 
 showNewProduct: Devuelve la vista con el formulario para subir un artículo nuevo.
