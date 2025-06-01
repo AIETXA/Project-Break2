@@ -3,3 +3,4 @@ const routes = express.Router();
 const Product = require('../models/Product.js');
 
 
+router.post('/productos', productController.create);
