@@ -1,41 +1,49 @@
-function getNewProductForm() {
+function getNewProductForm(product = {}, options = {}) {
+  const isEdition = !!product._id;
+  const title = options.title || (isEdition ? 'Editar producto' : 'Crear nuevo producto');
+  const action = options.action || (isEdition ? `/productos/${product._id}?_method=PUT` : '/productos');
+  const buttonText = options.buttonText || (isEdition ? 'Guardar cambios' : 'Crear producto');
+  
     return `
     <section> 
-    <h2>Crear nuevo producto</h2>
-    <form action= "/productos" method="POST">
-    <label>Nombre:
-    <input type="text" name="name" required>
-    </label><br>
+      <h2>${title}</h2>
+      <form action= "${action}" method="POST">
 
-    <label>Precio:
-    <input type="number" name="price" required>
-    </label><br>
+      <label>Nombre:
+        <input type="text" name="nombre" value="${product.nombre || ''}" required>
+      </label><br>
 
-    <label>Descripcion:
-    <textarea="description"></textarea>
-    </label><br>
+      <label>Precio:
+        <input type="number" name="precio" value="${product.precio || ''}" required>
+      </label><br>
 
-    <label>Categoría:
-    <select name="category">
-        <option value="Camisetas">Camisetas</option>
-        <option value="Pantalones">Pantalones</option>
-        <option value="Zapatos">Zapatos</option>
-        <option value="Accesorios">Accesorios</option>
-    </select>
-    </label><br>
+      <label>Descripción:
+        <textarea name="descripcion">${product.descripcion || ''}</textarea>
+      </label><br>
 
-    <label>Imagen (URL):
-          <input type="text" name="image">
-        </label><br>
+      <label>Categoría:
+        <select name="category">
+          <option value="Camisetas" ${product.category === 'Camisetas' ? 'selected' : ''}>Camisetas</option>
+          <option value="Pantalones" ${product.category === 'Pantalones' ? 'selected' : ''}>Pantalones</option>
+          <option value="Zapatos" ${product.category === 'Zapatos' ? 'selected' : ''}>Zapatos</option>
+          <option value="Accesorios" ${product.category === 'Accesorios' ? 'selected' : ''}>Accesorios</option>
+        </select>
+      </label><br>
 
-    <label>Talle:
-     <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-        <option value="XL">XL</option>
-     </label><br>
+      <label>Imagen (URL):
+        <input type="text" name="imagen" value="${product.imagen || ''}">
+      </label><br>
+
+      <label>Talle:
+        <select name="talle">
+          <option value="S" ${product.talle === 'S' ? 'selected' : ''}>S</option>
+          <option value="M" ${product.talle === 'M' ? 'selected' : ''}>M</option>
+          <option value="L" ${product.talle === 'L' ? 'selected' : ''}>L</option>
+          <option value="XL" ${product.talle === 'XL' ? 'selected' : ''}>XL</option>
+        </select>    
+      </label><br>
         
-        <button type="submit">Crear producto</button>
+      <button type="submit">${buttonText}</button>
       </form>
     </section>
     `
