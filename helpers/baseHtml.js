@@ -7,7 +7,7 @@ function baseHtml(content) {
         <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1" />
-            <title>Tienda de Ropa</title>
+            <title>MI ropa, TU ropa</title>
             <link rel="stylesheet" href="/styles.css" />
         </head>
         <body> ${content} </body>

@@ -19,8 +19,10 @@
   },
   "homepage": "https://github.com/AIETXA/Project-Break2#readme",
   "dependencies": {
+    "cloudinary": "2.6.1",
     "dotenv": "16.5.0",
     "express": "5.1.0",
-    "mongoose": "8.15.1"
+    "mongoose": "8.15.1",
+    "multer": "2.0.0"
   }
 }

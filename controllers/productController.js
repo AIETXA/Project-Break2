@@ -40,7 +40,8 @@ const productControllers = {
 // Una vez creado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
   async create (req, res) {
     try {
-      const product = await Product.create({...req.body})
+      const product = await Product.create({...req.body});
+      const uploadImg = await cloudinary.uploader.upload(req.file.path);
       res.redirect('/dashboard')
   } catch (error) {
       console.log(error);

@@ -7,7 +7,7 @@ function getNewProductForm(product = {}, options = {}) {
     return `
     <section> 
       <h2>${title}</h2>
-      <form action= "${action}" method="POST">
+      <form action= "${action}" method="POST" enctype="multipart/form-data">
 
       <label>Nombre:
         <input type="text" name="nombre" value="${product.nombre || ''}" required>
@@ -31,10 +31,10 @@ function getNewProductForm(product = {}, options = {}) {
       </label><br>
 
       <label>Imagen (URL):
-        <input type="text" name="imagen" value="${product.imagen || ''}">
+        <input type="file" name="imagen" value="${product.imagen || ''}">
       </label><br>
 
-      <label>Talle:
+      <label>Talles disponibles:
         <select name="talle">
           <option value="S" ${product.talle === 'S' ? 'selected' : ''}>S</option>
           <option value="M" ${product.talle === 'M' ? 'selected' : ''}>M</option>
