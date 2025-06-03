@@ -4,6 +4,8 @@ const getNavBar = require('../helpers/getNavBar.js');
 const getProductCards = require('../helpers/getProductCards.js');
 const getProductDetail = require('../helpers/getProductDetail.js');
 const getNewProductForm = require('../helpers/getNewProductForm.js');
+const cloudinary = require('cloudinary').v2;
+
 
 const productControllers = { 
   
@@ -40,8 +42,11 @@ const productControllers = {
 // Una vez creado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
   async create (req, res) {
     try {
-      const product = await Product.create({...req.body});
+      console.log("📁 req.file:", req.file);
+      console.log("📝 req.body:", req.body);
       const uploadImg = await cloudinary.uploader.upload(req.file.path);
+      const imageUrl = uploadImg.secure_url;
+      const product = await Product.create({...req.body, imagen:imageUrl});
       res.redirect('/dashboard')
   } catch (error) {
       console.log(error);
