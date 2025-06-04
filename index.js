@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
-app.get('/', productRoutes);
+app.use('/create', productRoutes);
 
 
 
