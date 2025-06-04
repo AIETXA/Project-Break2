@@ -1,7 +1,9 @@
+
+
 function getNewProductForm(product = {}, options = {}) {
   const isEdition = !!product._id;
   const title = options.title || (isEdition ? 'Editar producto' : 'Crear nuevo producto');
-  const action = options.action || (isEdition ? `/productos/${product._id}?_method=PUT` : '/productos');
+  const action = options.action || (isEdition ? `/dashboard/${product._id}?_method=PUT` : '/create');
   const buttonText = options.buttonText || (isEdition ? 'Guardar cambios' : 'Crear producto');
   
     return `
@@ -31,7 +33,7 @@ function getNewProductForm(product = {}, options = {}) {
       </label><br>
 
       <label>Imagen (URL):
-        <input type="file" name="imagen" value="${product.imagen || ''}">
+        <input type="file" name="imagen">
       </label><br>
 
       <label>Talles disponibles:

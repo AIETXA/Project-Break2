@@ -56,12 +56,16 @@ async create (req, res) {
 //showEditProduct: Devuelve la vista con el formulario para editar un producto.
   async showEditProduct (req, res) {
     try {
+      console.log('ID recibido:', req.params.id);
       const product = await Product.findById(req.params.id);
+      console.log('Producto encontrado:', product);
+
       const formHtml = getNewProductForm(product, {
         title: 'Editar producto',
-        action: `/products/${product._id}?_method=PUT`,
+        action: `/dashboard/${product._id}?_method=PUT`,
         buttonText: 'Guardar cambios'
       });
+      
       const html = baseHtml(getNavBar() + formHtml);
       res.send(html);
      
