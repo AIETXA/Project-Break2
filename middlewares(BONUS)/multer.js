@@ -1,4 +1,6 @@
-const  multer   =  require ( 'multer' ) 
-const  upload  =  multer ( {  dest : 'uploads/'  } ) //cuando alguien suba un archivo lo guarda en upload
+const  multer   =  require ( 'multer' );
+const storage = require('../config/cloudinaryConfig');
+
+const  upload  =  multer ( {  storage  } );
 
 module.exports = upload;

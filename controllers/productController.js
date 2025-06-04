@@ -42,9 +42,10 @@ const productControllers = {
 // Una vez creado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
 async create (req, res) {
     try {
-      //const uploadImg = await cloudinary.uploader.upload(req.file.path);
-      //const imageUrl = uploadImg.secure_url;
-      const product = await Product.create({...req.body});
+      if(!req.file)
+        return res.status(400).send({message:"La imagen no se pudo subir"})
+        const imagen = req.file.path;
+        const product = await Product.create({...req.body, imagen});
       res.redirect('/dashboard')
   } catch (error) {
       console.log(error);
@@ -52,17 +53,6 @@ async create (req, res) {
     }
   },
 
-
-    /*async create (req, res) {
-    try {
-      const product = await Product.create(...req.body);
-      res.status(201).send(product);
-
-    } catch (error) {
-      console.error(error);
-        res.status(500).send('error al crear producto')
-      }
-  },*/
 //showEditProduct: Devuelve la vista con el formulario para editar un producto.
   async showEditProduct (req, res) {
     try {
@@ -89,6 +79,7 @@ async create (req, res) {
       const formHtml = getNewProductForm(); 
       const html = baseHtml(getNavBar() + formHtml);
       res.send(html);
+
   } catch (error) {
       console.error(error);
       res.status(500).send({message:'Error al cargar el formulario'})
