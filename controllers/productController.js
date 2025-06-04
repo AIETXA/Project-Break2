@@ -13,7 +13,7 @@ const productControllers = {
   async showProducts (req, res) {
     try {
       const products = await Product.find();
-      const productCards = getProductCards(products);
+      const productCards = getProductCards(products, true);
       const html = baseHtml(getNavBar() + productCards);
       res.send(html);
   } catch (error) {
