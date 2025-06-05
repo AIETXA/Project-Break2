@@ -1,7 +1,9 @@
-
+const { menuPublico } = require('./menuPublico');
+const { menuDashboard } = require('./menuDashboard');
 
 function baseHtml(content, isDashboard = false) {
-    const menu = isDashboard ? getMenuDashboard() : getMenuPublico();
+    const menu = isDashboard ? menuDashboard() : menuPublico();
+
  return `
     <!DOCTYPE html>
         <html lang="es">
@@ -17,7 +19,12 @@ function baseHtml(content, isDashboard = false) {
             </style>
             
         </head>
-        <body> ${content} </body>
+        <body> 
+            ${menu}
+        <main>
+            ${content}
+        </main> 
+        </body>
         </html>`;
 }
 

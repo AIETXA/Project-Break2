@@ -3,7 +3,7 @@
 function getNewProductForm(product = {}, options = {}) {
   const isEdition = !!product._id;
   const title = options.title || (isEdition ? 'Editar producto' : 'Crear nuevo producto');
-  const action = options.action || (isEdition ? `/dashboard/${product._id}?_method=PUT` : '/create');
+  const action = options.action || (isEdition ? `/dashboard/${product._id}?_method=PUT` : '/products');
   const buttonText = options.buttonText || (isEdition ? 'Guardar cambios' : 'Crear producto');
   
     return `

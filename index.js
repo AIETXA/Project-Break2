@@ -17,6 +17,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
+
 app.use('/', productRoutes);
 
 app.use(methodOverride('_method'));

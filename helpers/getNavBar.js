@@ -13,6 +13,17 @@ function getNavBar(isDashboard = false) {
     <a href="/dashboard">Dashboard</a>
     </nav>
     `;
+    } else {
+      return `
+        <nav>
+          <a href="/dashboard">Dashboard</a>
+          <ul>
+            <li><a href="/dashboard/new">Nuevo producto</a></li>
+            <li><a href="/dashboard/edit">Editar producto</a></li>
+          </ul>
+          <a href="/products">Ir a tienda</a>
+        </nav>
+      `
     }
 }
 

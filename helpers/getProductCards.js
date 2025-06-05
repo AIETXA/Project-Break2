@@ -14,7 +14,7 @@ function getProductCards(products) {
         
         <form method="POST" action="/dashboard/${product._id}/delete?_method=DELETE" style="display:inline;">
         <button type="submit" onclick="return confirm('¿Eliminar producto?')">Eliminar</button>
-        </form> : ''}
+        </form>
       </div>
     `;
   }

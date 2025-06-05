@@ -5,6 +5,8 @@ const getProductCards = require('../helpers/getProductCards.js');
 const getProductDetail = require('../helpers/getProductDetail.js');
 const getNewProductForm = require('../helpers/getNewProductForm.js');
 const cloudinary = require('cloudinary').v2;
+const { menuPublico } = require('../helpers/menuPublico.js');
+
 
 
 const productControllers = { 
@@ -17,7 +19,7 @@ const productControllers = {
       const html = baseHtml(getNavBar() + productCards);
       res.send(html);
   } catch (error) {
-      console.error(error);
+      console.error('ERROR INTERNO EN showProducts:', error);
       res.status(500).send({message:'Error al intentar devolver la vista de los productos'})
 
     }
@@ -29,7 +31,7 @@ const productControllers = {
       const id = req.params.id;
       const product = await Product.findById(id);
       const productHtml = getProductDetail(product); 
-      const html = baseHtml(getNavBar() + productHtml);
+      const html = baseHtml(getNavBar(true) + productHtml);
       res.send(html);
   } catch (error) {
       console.error(error);
@@ -66,7 +68,7 @@ async create (req, res) {
         buttonText: 'Guardar cambios'
       });
       
-      const html = baseHtml(getNavBar() + formHtml);
+      const html = baseHtml(getNavBar(true) + formHtml);
       res.send(html);
      
   } catch (error) {
@@ -78,10 +80,11 @@ async create (req, res) {
 
 //showNewProduct: Devuelve la vista con el formulario para subir un artículo nuevo.*/
   async showNewProduct (req, res) {
+      console.log('Entré en showNewProduct');
     try {
-      console.log(html)
       const formHtml = getNewProductForm(); 
-      const html = baseHtml(getNavBar() + formHtml);
+      const html = baseHtml(getNavBar(true) + formHtml);
+      console.log(html)
       res.send(html);
 
   } catch (error) {
