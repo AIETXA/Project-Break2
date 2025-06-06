@@ -1,4 +1,4 @@
-function getProductDetail(product) {
+function detalleDelProducto(product) {
       return `
             <div class="product-detail" id="${product._id}">
             <img src="${product.imagen}" alt="${product.nombre}">
@@ -13,4 +13,4 @@ function getProductDetail(product) {
  
 
 
-module.exports = getProductDetail;
+module.exports = detalleDelProducto;

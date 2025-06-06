@@ -1,16 +1,16 @@
-function getNavBar(isDashboard = false) {
+function barraNavegacion(isDashboard = false) {
   if(!isDashboard) {
 
     return `
     <nav>
     <a href="/products">Inicio</a>
+    <a href="/dashboard">Dashboard</a>
     <ul>
     <li><a href="/products?categoria=Camisetas">Camisetas</a></li>
     <li><a href="/products?categoria=Pantalones">Pantalones</a></li>
     <li><a href="/products?categoria=Zapatos">Zapatos</a></li>
     <li><a href="/products?categoria=Accesorios">Accesorios</a></li>
     </ul>
-    <a href="/dashboard">Dashboard</a>
     </nav>
     `;
     } else {
@@ -18,8 +18,8 @@ function getNavBar(isDashboard = false) {
         <nav>
           <a href="/dashboard">Dashboard</a>
           <ul>
-            <li><a href="/dashboard/new">Nuevo producto</a></li>
-            <li><a href="/dashboard/edit">Editar producto</a></li>
+            <li><a href="/dashboard/nuevo">Nuevo producto</a></li>
+            <li><a href="/dashboard">Editar producto</a></li>
           </ul>
           <a href="/products">Ir a tienda</a>
         </nav>
@@ -27,4 +27,4 @@ function getNavBar(isDashboard = false) {
     }
 }
 
-module.exports = getNavBar;
+module.exports = barraNavegacion;
