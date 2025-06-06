@@ -1,6 +1,9 @@
 function detalleDelProducto(product) {
       return `
-            <div class="product-detail" id="${product._id}">
+            <div class="contenedor" id="${product._id}">
+            <h1>Productos</h1>
+            <div class="grilla-productos"></div>
+            <div class="carta-producto"></div>
             <img src="${product.imagen}" alt="${product.nombre}">
             <h2>${product.nombre}</h2>
             <p>${product.descripcion}</p>

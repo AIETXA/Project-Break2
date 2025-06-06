@@ -8,8 +8,8 @@ function formNuevoProducto(product = {}, opciones = {}) {
   
     return `
     <section> 
-      <h2>${titulo}</h2>
-      <form action= "${accion}" method="POST">
+      <h2>La naranja no se mancha</h2>
+      <form class="formulario-producto" action= "${accion}" method="POST">
 
       <label>Nombre:
         <input type="text" name="nombre" value="${product.nombre || ''}" required>

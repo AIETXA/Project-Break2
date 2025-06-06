@@ -86,7 +86,7 @@ async create (req, res) {
 
       const formHtml = formNuevoProducto(producto, {
         titulo: 'Editar producto',
-        accion: `/dashboard/${product._id}?_method=PUT`,
+        accion: `/dashboard/${producto._id}?_method=PUT`,
         botonText: 'Guardar cambios'
       });
       
