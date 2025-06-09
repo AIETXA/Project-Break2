@@ -3,6 +3,9 @@ const routes = express.Router();
 const Product = require('../models/Product.js');
 const controladorProductos = require('../controllers/controladorProductos.js');
 
+routes.get('/', (req, res) => {
+  res.redirect('/dashboard');
+});
 
 routes.get('/products', controladorProductos.mostrarProductos);
 routes.get('/dashboard', controladorProductos.mostrarProductos);
