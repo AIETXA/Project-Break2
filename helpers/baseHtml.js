@@ -19,8 +19,8 @@ function baseHtml(content, menu = '') {
 
   body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f0f0;
-    color: #222;
+    background-color:  #f84d00;
+    color: white;
   }
 
   header {

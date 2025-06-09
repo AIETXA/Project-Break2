@@ -3,8 +3,8 @@ function tarjetaDelProducto(products) {
   for (let product of products) {
     html += `
       <div class="carta-producto">
+        <h3>${product.nombre}</h2>
         <img src="${product.imagen || 'https://res.cloudinary.com/ddtqzg7w9/image/upload/v1749039797/LEBRON_df0hsl.jpg'}" alt="${product.nombre}"/>
-        <h2>${product.nombre}</h2>
         <p>${product.descripcion}</p>
         <p>Talle:${product.talle}</p>
         <p>Precio:${product.precio}€</p>

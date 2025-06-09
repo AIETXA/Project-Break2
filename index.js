@@ -2,7 +2,8 @@
 
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
 const { dbConnection } = require('./config/bbdd');
 const rutasProductos = require('./routes/rutasProductos');
 const methodOverride = require('method-override');
@@ -20,5 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', rutasProductos);
 app.use('/api', rutasApi);
+app.get('/', (req, res) => {
+  res.redirect('/dashboard');
+});
+
 
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`) );
