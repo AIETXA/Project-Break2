@@ -9,7 +9,7 @@ function formNuevoProducto(product = {}, opciones = {}) {
     return `
     <section> 
       <h2>La naranja no se mancha</h2>
-      <form class="formulario-producto" action= "${accion}" method="POST">
+      <form class="formulario-producto" action= "${accion}" method="POST" enctype="multipart/form-data">
 
       <label>Nombre:
         <input type="text" name="nombre" value="${product.nombre || ''}" required>
@@ -32,8 +32,8 @@ function formNuevoProducto(product = {}, opciones = {}) {
         </select>
       </label><br>
 
-      <label>Imagen(URL):
-          <input type="text" name="imagen"/>
+      <label>Imagen:
+          <input type="file" name="imagen" accept="imagen/*" />
       </label><br>
 
       <label>Talles disponibles:

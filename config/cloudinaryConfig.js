@@ -1,6 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
-
+require('dotenv').config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -10,10 +10,17 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: 'demo', // Elige el nombre de tu carpeta. Si no existe se crea
-    allowed_formats: ['jpg', 'png', 'jpeg', 'webp'], // Formatos permitidos
-    transformation: [{ width: 800, crop: 'limit' }], 
+    params: async (req, file) => {
+    const timestamp = Date.now();
+    const nombreOriginal = file.originalname.split('.')[0];
+    const categoria = req.body?.categoria || 'general';
+
+    return {
+      folder: `ecommerce/${categoria}`,
+      allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+      transformation: [{ width: 800, crop: 'limit' }],
+      public_id: `${timestamp}-${nombreOriginal}`,
+    };
   },
 });
 

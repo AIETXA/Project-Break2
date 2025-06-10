@@ -55,10 +55,10 @@ function baseHtml(content, menu = '') {
         }
 
        .grilla-productos {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 5 productos por fila */
-  gap: 20px;
-  padding: 20px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr); /* 5 productos por fila */
+        gap: 20px;
+        padding: 20px;
 }
 
 .carta-producto {
@@ -126,3 +126,4 @@ function baseHtml(content, menu = '') {
   `;
 }
 
+module.exports = baseHtml;

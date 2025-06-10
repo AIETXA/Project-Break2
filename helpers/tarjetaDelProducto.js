@@ -1,16 +1,17 @@
 function tarjetaDelProducto(product) {
-  return `
-    <div class="contenedor" style="text-align: center; margin: 2rem;">
-      <h1>Productos</h1>
-      <h2>${product.nombre}</h2>
-      <img src="${product.imagen}" alt="${product.nombre}">
+ return `
+   <div class="tarjetaProducto" style="text-align: center; margin: 2rem;">
+      <h1>${product.nombre}</h1>
+      ${product.imagen && product.imagen.startsWith('http') 
+        ? `<img src="${product.imagen}" alt="${product.nombre}" style="width: 250px; border-radius: 10px;" />`
+        : ''
+      }
       <p>${product.descripcion}</p>
-      <p><strong>Talle:</strong> ${product.talle}</p>
-      <p><strong>Precio: ${product.precio}€</strong></p>
-      <a href="/products">Volver</a>
-    </div>
+      <p><strong>${product.precio} €</strong></p>
+      <p>Categoría: ${product.categoria}</p>
+      <p><strong>Talla:</strong> ${product.talle}</p>
+    </div>  
   `;
 }
 
-
-module.exports = tarjetaDelProducto;
+module.exports = tarjetaDelProducto;  

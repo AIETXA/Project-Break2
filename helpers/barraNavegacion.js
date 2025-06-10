@@ -1,12 +1,12 @@
-function barraNavegacion(isDashboard = false) {
-  if(!isDashboard) {
+function barraNavegacion(esAdmin = false) {
+  if(!esAdmin) {
 
     return `
     <nav>
       <a href="/products">Inicio</a>
       <a href="/products?categoria=Camisetas">Camisetas</a>
       <a href="/products?categoria=Pantalones">Pantalones</a>
-      <a href="/products?categoria=Zapatos">Zapatos</a>
+      <a href="/products?categoria=Sudaderas">Sudaderas</a>
       <a href="/products?categoria=Accesorios">Accesorios</a>
       
     </nav>

@@ -4,7 +4,7 @@ const barraNavegacion = require('../helpers/barraNavegacion.js');
 const tarjetaDelProducto = require('../helpers/tarjetaDelProducto.js');
 const grillaDeProductos = require('../helpers/grillaDeProductos.js');
 const formNuevoProducto = require('../helpers/formNuevoProducto.js');
-const cloudinary = require('cloudinary').v2;
+const esRutaAdmin = require('../helpers/esRutaAdmin.js');
 
 
 
@@ -16,13 +16,18 @@ const controladorProductos = {
   //showProducts: Devuelve la vista con todos los productos.
   async mostrarProductos (req, res) {
     try {
-      const productos = await Product.find();
+      const { cat: categoria } = req.query;
+      const filtro = categoria ? { categoria } : {};
+      const productos = await Product.find(filtro);
+      const esAdmin = esRutaAdmin(req);
+      
       const contenido = `
-        <h1>Catálogo de productos</h1>
-        ${grillaDeProductos(productos)}
-      `;
-    const html = baseHtml(contenido, barraNavegacion(false));
-    res.send(html);
+      <h2>Productos</h2>
+         ${grillaDeProductos(productos, esAdmin)}
+    `;
+
+      const html = baseHtml(contenido, barraNavegacion(esAdmin));
+      res.send(html);
       
     } catch (error) {
       console.log(error);
@@ -32,14 +37,16 @@ const controladorProductos = {
   //showProductById: Devuelve la vista con el detalle de un producto.
   async mostrarProductoById (req, res) {
     try {
-      const productId = req.params.productId;
-      const producto = await Product.findById(productId);
+      const productoId = req.params.productoId;
+      console.log('ID recibido:', productoId);
+      const producto = await Product.findById(productoId);
 
     if (!producto) {
       return res.status(404).send('Producto no encontrado');
     }
+      const esAdmin = esRutaAdmin(req);
       const contenido = tarjetaDelProducto(producto);
-      const html = baseHtml(barraNavegacion(true) + detalleProducto);
+      const html = baseHtml(barraNavegacion(true) + producto);
       res.send(html);
 
     } catch (error) {
@@ -94,7 +101,7 @@ async create (req, res) {
     
     try {
       const formHtml = formNuevoProducto(); 
-      const html = baseHtml(barraNavegacion(true) + formHtml);
+      const html = baseHtml(barraNavegacion(esAdmin) + formHtml);
       
       res.send(html);
 
