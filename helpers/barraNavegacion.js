@@ -8,6 +8,7 @@ function barraNavegacion(isDashboard = false) {
       <a href="/products?categoria=Pantalones">Pantalones</a>
       <a href="/products?categoria=Zapatos">Zapatos</a>
       <a href="/products?categoria=Accesorios">Accesorios</a>
+      
     </nav>
     `;
     } else {

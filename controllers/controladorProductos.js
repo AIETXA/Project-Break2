@@ -2,7 +2,7 @@ const Product = require('../models/Product.js');
 const baseHtml = require('../helpers/baseHtml.js');
 const barraNavegacion = require('../helpers/barraNavegacion.js');
 const tarjetaDelProducto = require('../helpers/tarjetaDelProducto.js');
-const detalleDelProducto = require('../helpers/detalleDelProducto.js');
+const grillaDeProductos = require('../helpers/grillaDeProductos.js');
 const formNuevoProducto = require('../helpers/formNuevoProducto.js');
 const cloudinary = require('cloudinary').v2;
 
@@ -17,18 +17,12 @@ const controladorProductos = {
   async mostrarProductos (req, res) {
     try {
       const productos = await Product.find();
-      const html = `
-      <html>
-        ${baseHtml()}
-        <body>
-          ${barraNavegacion(false)}
-          <h1>Catálogo de productos</h1>
-            ${tarjetaDelProducto(productos)}
-        </body>
-      </html>
-    `;
-      
-      res.send(html);
+      const contenido = `
+        <h1>Catálogo de productos</h1>
+        ${grillaDeProductos(productos)}
+      `;
+    const html = baseHtml(contenido, barraNavegacion(false));
+    res.send(html);
       
     } catch (error) {
       console.log(error);
@@ -44,7 +38,7 @@ const controladorProductos = {
     if (!producto) {
       return res.status(404).send('Producto no encontrado');
     }
-      const detalleProducto = detalleDelProducto(producto);
+      const contenido = tarjetaDelProducto(producto);
       const html = baseHtml(barraNavegacion(true) + detalleProducto);
       res.send(html);
 
@@ -59,14 +53,8 @@ const controladorProductos = {
 async create (req, res) {
     try {
       const { nombre, descripcion, imagen, categoria, talle, precio } = req.body;
-      const  imagenFinal = imagen;
-      const producto = await Product.create({ 
-      nombre,
-      descripcion,
-      imagen: imagenFinal,
-      categoria,
-      talle,
-      precio});
+      const producto = await Product.create({ nombre, descripcion, imagen, categoria, talle, precio });
+     
 
       res.redirect('/dashboard')
 
@@ -82,6 +70,7 @@ async create (req, res) {
   async editarProducto (req, res) {
     try {
       const producto = await Product.findById(req.params.id);
+      if (!producto) return res.status(404).send('Producto no encontrado');
       console.log('Producto encontrado:', producto);
 
       const formHtml = formNuevoProducto(producto, {
@@ -120,8 +109,8 @@ async create (req, res) {
   async modificarProducto (req, res) {
     try {
       const id = req.params.id
-      const modificarProducto = await Product.findByIdAndUpdate(id, req.body, {new: true});
-    if (!modificarProducto) {
+      const productoActualizado  = await Product.findByIdAndUpdate(id, req.body, {new: true});
+    if (!productoActualizado ) {
       return res.status(404).send('Producto no encontrado');
     }
       res.redirect('/dashboard')
@@ -136,8 +125,8 @@ async create (req, res) {
   async eliminarProducto (req, res) {
     try {
       const id = req.params.id
-      const eliminarProducto = await Product.findByIdAndDelete(id)
-      if (!eliminarProducto) {
+      const productoEliminado  = await Product.findByIdAndDelete(id)
+      if (!productoEliminado ) {
         return res.status(404).json({message: "Producto no encontrado"})
       }  
       res.redirect('/dashboard');
