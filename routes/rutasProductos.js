@@ -14,7 +14,7 @@ routes.get('/', (req, res) => {
 routes.get('/products', controladorProductos.mostrarProductos);
 routes.get('/products/:productoId', controladorProductos.mostrarProductoById);
 
-routes.get('/dashboard', protegerRuta, controladorProductos.mostrarNuevoProducto);
+routes.get('/dashboard', protegerRuta, controladorProductos.mostrarProductos);
 routes.post('/dashboard/nuevo', protegerRuta, controladorProductos.create);
 
 routes.get('/dashboard/:productoId', protegerRuta, controladorProductos.mostrarProductoById);

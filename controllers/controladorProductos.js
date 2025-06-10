@@ -59,19 +59,31 @@ const controladorProductos = {
   // Una vez creado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
 async create (req, res) {
     try {
-      const { nombre, descripcion, imagen, categoria, talle, precio } = req.body;
+      const { nombre, descripcion, categoria, talle, precio } = req.body;
       const producto = await Product.create({ nombre, descripcion, imagen, categoria, talle, precio });
      
+      const imagen = req.file?.path || req.file?.url || '';
+      const nuevoProducto = new Product({
+        nombre,
+        descripcion,
+        imagen,
+        categoria,
+        talle,
+        precio
+      });
 
-      res.redirect('/dashboard')
+      await nuevoProducto.save();
+      res.redirect(`/dashboard/${nuevoProducto._id}`);
 
-  } catch (error) {
+    } catch (error) {
       console.log(error);
       res.status(500).send({message: 'Error al intentar crear un producto'})
     }
   },
 
-
+  mostrarNuevoProducto: (req, res) => {
+    res.send(formNuevoProducto());
+  },
 
 //showEditProduct: Devuelve la vista con el formulario para editar un producto.
   async editarProducto (req, res) {
@@ -101,8 +113,10 @@ async create (req, res) {
     
     try {
       const formHtml = formNuevoProducto(); 
-      const html = baseHtml(barraNavegacion(esAdmin) + formHtml);
-      
+      const html = baseHtml({
+        titulo: 'Nuevo producto',
+        contenido: formNuevoProducto({accion: '/products', producto: {} })
+      })
       res.send(html);
 
   } catch (error) {
