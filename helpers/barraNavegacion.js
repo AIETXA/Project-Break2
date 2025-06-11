@@ -13,13 +13,9 @@ function barraNavegacion(esAdmin = false) {
     `;
     } else {
       return `
-        <nav>
-          <ul>
-            <li><a href="/dashboard/nuevo">Nuevo producto</a></li>
-            <li><a href="/dashboard">Editar producto</a></li>
-          </ul>
-          <a href="/products">Ir a tienda</a>
-        </nav>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/dashboard/nuevo">Nuevo producto</a>
+        <a href="/products">Tienda</a>
       `
     }
 }

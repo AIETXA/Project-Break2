@@ -24,7 +24,7 @@ function formProducto(product = {}, options = {}) {
   <body>
     <h1>${titulo}</h1>
 
-    <form action="${accion}" method="POST" enctype="multipart/form-data">
+    <form action="${accion}" method="POST">
       ${product._id ? `<input type="hidden" name="_method" value="PUT" />` : ''}
 
       <label>Nombre:
@@ -39,13 +39,10 @@ function formProducto(product = {}, options = {}) {
         <textarea name="descripcion">${product.descripcion || ''}</textarea>
       </label>
 
-      <label>Imagen (URL actual):
-        <input type="text" name="imagenUrl" value="${product.imagen || ''}" />
+      <label>Imagen (URL):
+        <input type="text" name="imagenUrl" placeholder="URL de la imagen" value="${product.imagen || ''}" />
       </label>
 
-      <label>O Subir nueva imagen:
-        <input type="file" name="imagen" accept="image/*" />
-      </label>
 
       <label>Categoría:
         <select name="categoria" required>

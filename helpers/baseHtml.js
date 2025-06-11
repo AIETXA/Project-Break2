@@ -77,20 +77,19 @@ function baseHtml(content, menu = '') {
   border-radius: 5px;
 }
 
-        .btn, button {
-          background-color: #f84d00;
-          color: white;
-          padding: 5px 10px;
-          border: none;
-          border-radius: 5px;
-          margin-top: 10px;
-          cursor: pointer;
-          text-decoration: none;
-        }
+    .btn, button {
+      background-color: #f84d00;
+      color: white;
+      padding: 10px 15px; /* <-- más alto y ancho */
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 1rem;
+      display: inline-block;
+    }
 
-        .btn:hover, button:hover {
-          background-color: #d74200;
-        }
 
         @media (max-width: 1024px) {
           .grilla-productos {

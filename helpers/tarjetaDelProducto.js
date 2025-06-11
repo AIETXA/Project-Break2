@@ -1,4 +1,4 @@
-function tarjetaDelProducto(product) {
+function tarjetaDelProducto(product, esAdmin = false) {
  return `
    <div class="tarjetaProducto" style="text-align: center; margin: 2rem;">
       <h1>${product.nombre}</h1>
@@ -6,11 +6,30 @@ function tarjetaDelProducto(product) {
         ? `<img src="${product.imagen}" alt="${product.nombre}" style="width: 250px; border-radius: 10px;" />`
         : ''
       }
-      <p>${product.descripcion}</p>
-      <p><strong>${product.precio} €</strong></p>
-      <p>Categoría: ${product.categoria}</p>
+      <p><strong>Descripción:</strong> ${product.descripcion}</p>
+      <p><strong>Precio:</strong> ${product.precio} €</p>
+      <p><strong>Categoría:</strong> ${product.categoria}</p>
       <p><strong>Talla:</strong> ${product.talle}</p>
-    </div>  
+
+      ${esAdmin
+        ? `
+          <a href="/dashboard/${product._id}/editar">
+            <button class="editar">Editar</button>
+          </a>
+          <form action="/dashboard/${product._id}/borrar?_method=DELETE" method="POST" style="display:inline;">
+            <button type="submit" class="eliminar">Eliminar</button>
+          </form>
+        `
+        : `
+          <form action="/carrito/agregar" method="POST" style="margin-top: 1rem;">
+            <input type="hidden" name="productoId" value="${product._id}" />
+            <button type="submit" class="btn">Agregar al carrito</button>
+          </form>
+        `
+      }
+      <div style="margin-top: 20px;">
+        <a href="/products" class="btn" >Volver a la tienda</a>
+      </div>
   `;
 }
 

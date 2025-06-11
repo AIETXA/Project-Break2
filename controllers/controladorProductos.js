@@ -5,11 +5,9 @@ const tarjetaDelProducto = require('../helpers/tarjetaDelProducto.js');
 const grillaDeProductos = require('../helpers/grillaDeProductos.js');
 const formProducto = require('../helpers/formProducto.js');
 const esRutaAdmin = require('../helpers/esRutaAdmin.js');
-
-
-
-
-
+const cloudinary = require('../config/cloudinaryConfig.js');
+const categorias = ['Camisetas', 'Sudaderas', 'Pantalones', 'Accesorios'];
+const talles = ['S', 'M', 'L', 'XL'];
 
 
 const controladorProductos = { 
@@ -25,7 +23,6 @@ const controladorProductos = {
       <h2>Productos</h2>
          ${grillaDeProductos(productos, esAdmin)}
     `;
-
       const html = baseHtml(contenido, barraNavegacion(esAdmin));
       res.send(html);
       
@@ -38,15 +35,14 @@ const controladorProductos = {
   async mostrarProductoById (req, res) {
     try {
       const productoId = req.params.productoId;
-      console.log('ID recibido:', productoId);
       const producto = await Product.findById(productoId);
 
     if (!producto) {
       return res.status(404).send('Producto no encontrado');
     }
       const esAdmin = esRutaAdmin(req);
-      const contenido = tarjetaDelProducto(producto);
-      const html = baseHtml(barraNavegacion(true) + contenido);
+      const contenido = tarjetaDelProducto(producto, esAdmin);
+      const html = baseHtml(barraNavegacion(esAdmin) + contenido);
 
       res.send(html);
 
@@ -60,20 +56,15 @@ const controladorProductos = {
   // Una vez creado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
 async create (req, res) {
     try {
-      const { nombre, descripcion, categoria, talle, precio } = req.body;
-      const imagen = req.file?.path || req.file?.url || '';
-
+      const { nombre, descripcion, categoria, talle, precio, imagenUrl } = req.body;
       const nuevoProducto = await Product.create({
         nombre,
         descripcion,
-        imagen,
+        imagen: imagenUrl || '',
         categoria,
         talle,
         precio
       });
-
-     
-
       res.redirect(`/dashboard/${nuevoProducto._id}`);
 
     } catch (error) {
@@ -87,8 +78,7 @@ async create (req, res) {
     try {
       const producto = await Product.findById(req.params.productoId).lean();
       if (!producto) return res.status(404).send('Producto no encontrado');
-      console.log('Producto encontrado:', producto);
-
+      
       const htmlForm = formProducto(producto, {
         titulo: 'Editar producto',
         accion: `/dashboard/${producto._id}?_method=PUT`,
@@ -96,8 +86,6 @@ async create (req, res) {
         categorias,
         talles
       });
-      
-      
       res.send(baseHtml(barraNavegacion(true) + htmlForm));
      
   } catch (error) {
@@ -109,17 +97,16 @@ async create (req, res) {
 
 //showNewProduct: Devuelve la vista con el formulario para subir un artículo nuevo.*/
   async mostrarNuevoProducto (req, res) {
-    
     try {
       const esAdmin = esRutaAdmin(req);
-      const contenido = formProducto({
-        accion:'/dashboard/nuevo',
-        producto: {},
+      const contenido = formProducto({}, {
         titulo:'Nuevo producto',
-        botonText:'Crear producto'
+        accion: '/dashboard/nuevo',
+        botonText:'Crear producto',
+        categorias,
+        talles
       }); 
-      const html = baseHtml(barraNavegacion(esAdmin) + contenido);
-      res.send(html);
+      res.send(baseHtml(barraNavegacion(esAdmin) + contenido));
 
   } catch (error) {
       console.error(error);
