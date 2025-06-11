@@ -15,7 +15,9 @@ routes.get('/products', controladorProductos.mostrarProductos);
 routes.get('/products/:productoId', controladorProductos.mostrarProductoById);
 
 routes.get('/dashboard', protegerRuta, controladorProductos.mostrarProductos);
-routes.post('/dashboard/nuevo', protegerRuta, controladorProductos.create);
+routes.get('/dashboard/nuevo', protegerRuta, controladorProductos.mostrarNuevoProducto);//mostrar formulario para crear nuevo producto
+
+routes.post('/dashboard/nuevo', protegerRuta, upload.single('imagen'), controladorProductos.create);//crear productos
 
 routes.get('/dashboard/:productoId', protegerRuta, controladorProductos.mostrarProductoById);
 routes.get('/dashboard/:productoId/editar', protegerRuta, controladorProductos.editarProducto);

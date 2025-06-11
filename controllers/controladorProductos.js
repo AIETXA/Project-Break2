@@ -3,7 +3,7 @@ const baseHtml = require('../helpers/baseHtml.js');
 const barraNavegacion = require('../helpers/barraNavegacion.js');
 const tarjetaDelProducto = require('../helpers/tarjetaDelProducto.js');
 const grillaDeProductos = require('../helpers/grillaDeProductos.js');
-const formNuevoProducto = require('../helpers/formNuevoProducto.js');
+const formProducto = require('../helpers/formProducto.js');
 const esRutaAdmin = require('../helpers/esRutaAdmin.js');
 
 
@@ -46,7 +46,8 @@ const controladorProductos = {
     }
       const esAdmin = esRutaAdmin(req);
       const contenido = tarjetaDelProducto(producto);
-      const html = baseHtml(barraNavegacion(true) + producto);
+      const html = baseHtml(barraNavegacion(true) + contenido);
+
       res.send(html);
 
     } catch (error) {
@@ -60,10 +61,9 @@ const controladorProductos = {
 async create (req, res) {
     try {
       const { nombre, descripcion, categoria, talle, precio } = req.body;
-      const producto = await Product.create({ nombre, descripcion, imagen, categoria, talle, precio });
-     
       const imagen = req.file?.path || req.file?.url || '';
-      const nuevoProducto = new Product({
+
+      const nuevoProducto = await Product.create({
         nombre,
         descripcion,
         imagen,
@@ -72,7 +72,8 @@ async create (req, res) {
         precio
       });
 
-      await nuevoProducto.save();
+     
+
       res.redirect(`/dashboard/${nuevoProducto._id}`);
 
     } catch (error) {
@@ -81,25 +82,23 @@ async create (req, res) {
     }
   },
 
-  mostrarNuevoProducto: (req, res) => {
-    res.send(formNuevoProducto());
-  },
-
 //showEditProduct: Devuelve la vista con el formulario para editar un producto.
   async editarProducto (req, res) {
     try {
-      const producto = await Product.findById(req.params.id);
+      const producto = await Product.findById(req.params.productoId).lean();
       if (!producto) return res.status(404).send('Producto no encontrado');
       console.log('Producto encontrado:', producto);
 
-      const formHtml = formNuevoProducto(producto, {
+      const htmlForm = formProducto(producto, {
         titulo: 'Editar producto',
         accion: `/dashboard/${producto._id}?_method=PUT`,
-        botonText: 'Guardar cambios'
+        botonText: 'Guardar cambios',
+        categorias,
+        talles
       });
       
-      const html = baseHtml(barraNavegacion(true) + formHtml);
-      res.send(html);
+      
+      res.send(baseHtml(barraNavegacion(true) + htmlForm));
      
   } catch (error) {
       console.error(error);
@@ -112,11 +111,14 @@ async create (req, res) {
   async mostrarNuevoProducto (req, res) {
     
     try {
-      const formHtml = formNuevoProducto(); 
-      const html = baseHtml({
-        titulo: 'Nuevo producto',
-        contenido: formNuevoProducto({accion: '/products', producto: {} })
-      })
+      const esAdmin = esRutaAdmin(req);
+      const contenido = formProducto({
+        accion:'/dashboard/nuevo',
+        producto: {},
+        titulo:'Nuevo producto',
+        botonText:'Crear producto'
+      }); 
+      const html = baseHtml(barraNavegacion(esAdmin) + contenido);
       res.send(html);
 
   } catch (error) {
@@ -129,7 +131,7 @@ async create (req, res) {
 //updateProduct: Actualiza un producto. Una vez actualizado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
   async modificarProducto (req, res) {
     try {
-      const id = req.params.id
+      const id = req.params.productoId
       const productoActualizado  = await Product.findByIdAndUpdate(id, req.body, {new: true});
     if (!productoActualizado ) {
       return res.status(404).send('Producto no encontrado');
@@ -145,7 +147,7 @@ async create (req, res) {
   //eliminarProducto: Elimina un producto. Una vez eliminado, redirige a la vista de todos los productos del tablero.*/
   async eliminarProducto (req, res) {
     try {
-      const id = req.params.id
+      const id = req.params.productoId
       const productoEliminado  = await Product.findByIdAndDelete(id)
       if (!productoEliminado ) {
         return res.status(404).json({message: "Producto no encontrado"})
