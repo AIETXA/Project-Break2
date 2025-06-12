@@ -14,11 +14,10 @@ const controladorProductos = {
   //showProducts: Devuelve la vista con todos los productos.
   async mostrarProductos (req, res) {
     try {
-      console.log('Query recibida:', req.query);
+      
       const categoria = req.query.categoria;
       const filtro = categoria ? { categoria } : {};
       const productos = await Product.find(filtro);
-      console.log(filtro);
       const esAdmin = esRutaAdmin(req);
       
       const contenido = `

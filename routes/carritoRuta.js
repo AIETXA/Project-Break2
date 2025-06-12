@@ -9,6 +9,6 @@ router.post('/carrito/agregar', (req, res) => {
         req.session.carrito = [];
     }
     req.session.carrito.push(productoId);
-    res.send('Producto agregado al carrito');
+    res.send('<h1>Producto agregado al carrito 🛒</h1>');
 });
 module.exports = router;
