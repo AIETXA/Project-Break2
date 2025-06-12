@@ -40,6 +40,10 @@ function baseHtml(content, menu = '') {
           gap: 15px;
           background-color: rgba(72, 64, 64, 0);
           padding: 10px 20px;
+          position: relative;
+          transition: transform 0.3s ease;
+          overflow-x: auto;  
+          white-space: nowrap;  
         }
 
         nav a {
@@ -157,7 +161,8 @@ function baseHtml(content, menu = '') {
       .btn:hover {
         background-color: #d93f00;  
        }
-        
+
+
       @media (max-width: 1024px) {
           .grilla-productos {
             grid-template-columns: repeat(3, 1fr);
