@@ -1,7 +1,7 @@
 function tarjetaDelProducto(product, esAdmin = false) {
  return `
  <div style="display: flex; justify-content: center; align-items: center;">
-   <div class="carta-producto">
+   <div class="carta-producto detalle-producto">
       <h1>${product.nombre}</h1>
       <div class="imagen-producto">
       ${product.imagen && product.imagen.startsWith('http') 

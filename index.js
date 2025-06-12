@@ -10,6 +10,8 @@ const rutasApi = require('./routes/rutasAPIproductos');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const rutasAuth = require('./routes/authRutas');
+const carritoRuta = require('./routes/carritoRuta');
+const routes = require('./routes/rutasProductos');
 
 
 
@@ -35,6 +37,7 @@ app.use(session({
 app.use('/', rutasAuth);
 app.use('/', rutasProductos);
 app.use('/api', rutasApi);
+app.use(carritoRuta);
 
 
 
