@@ -15,7 +15,7 @@ function baseHtml(content, menu = '') {
 
         body {
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background-image: url('https://res.cloudinary.com/ddtqzg7w9/image/upload/v1749713999/PELOTA_FONDO_n10ary.jpg');
+          background-image: url('https://res.cloudinary.com/ddtqzg7w9/image/upload/v1749767261/PELOTA_FONDO_ifphoa.jpg');
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
@@ -107,7 +107,6 @@ function baseHtml(content, menu = '') {
         max-width: 100%;
         max-height: 100%;
         object-fit: contain;     
-        background-color: rgba(10, 42, 224, 0.9);
         border-radius: 8px;
         
       }
