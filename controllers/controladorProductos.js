@@ -21,7 +21,9 @@ const controladorProductos = {
       
       const contenido = `
       <h2>Productos</h2>
+      <div class="contenedor-grilla">
          ${grillaDeProductos(productos, esAdmin)}
+      </div>
     `;
       const html = baseHtml(contenido, barraNavegacion(esAdmin));
       res.send(html);
@@ -54,7 +56,7 @@ const controladorProductos = {
   
   //createProduct: Crea un nuevo producto. 
   // Una vez creado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
-async create (req, res) {
+async crearProducto (req, res) {
     try {
       const { nombre, descripcion, categoria, talle, precio, imagenUrl } = req.body;
       const nuevoProducto = await Product.create({
@@ -74,7 +76,7 @@ async create (req, res) {
   },
 
 //showEditProduct: Devuelve la vista con el formulario para editar un producto.
-  async editarProducto (req, res) {
+  async mostrarFormularioEdicion (req, res) {
     try {
       const producto = await Product.findById(req.params.productoId).lean();
       if (!producto) return res.status(404).send('Producto no encontrado');
@@ -116,14 +118,14 @@ async create (req, res) {
   },
 
 //updateProduct: Actualiza un producto. Una vez actualizado, redirige a la vista de detalle del producto oa la vista de todos los productos del tablero.
-  async modificarProducto (req, res) {
+  async actualizarProducto (req, res) {
     try {
       const id = req.params.productoId
       const productoActualizado  = await Product.findByIdAndUpdate(id, req.body, {new: true});
     if (!productoActualizado ) {
       return res.status(404).send('Producto no encontrado');
     }
-      res.redirect('/dashboard')
+    res.redirect(`/dashboard/${productoActualizado._id}`);
 
     } catch (error) {
       console.log(error)

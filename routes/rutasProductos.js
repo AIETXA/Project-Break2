@@ -21,11 +21,11 @@ routes.get('/dashboard/nuevo', protegerRuta, controladorProductos.mostrarNuevoPr
 
 
 
-routes.post('/dashboard/nuevo', protegerRuta, controladorProductos.create);//crear productos
+routes.post('/dashboard/nuevo', protegerRuta, controladorProductos.crearProducto);//crear productos
 
 routes.get('/dashboard/:productoId', protegerRuta, controladorProductos.mostrarProductoById);
-routes.get('/dashboard/:productoId/editar', protegerRuta, controladorProductos.editarProducto);
-routes.put('/dashboard/:productoId', protegerRuta, controladorProductos.modificarProducto); 
+routes.get('/dashboard/:productoId/editar', protegerRuta, controladorProductos.mostrarFormularioEdicion);
+routes.put('/dashboard/:productoId', protegerRuta, controladorProductos.actualizarProducto); 
 routes.delete('/dashboard/:productoId/borrar', protegerRuta, controladorProductos.eliminarProducto);
 
 

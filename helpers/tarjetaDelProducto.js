@@ -1,14 +1,14 @@
 function tarjetaDelProducto(product, esAdmin = false) {
  return `
- <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
-   <div class="tarjetaProducto" 
-    style="text-align: center; justify-content: center; height:500px; margin: 2rem; background-color:rgb(241, 229, 224);
-        width: 30%; ">
+ <div style="display: flex; justify-content: center; align-items: center;">
+   <div class="carta-producto">
       <h1>${product.nombre}</h1>
+      <div class="imagen-producto">
       ${product.imagen && product.imagen.startsWith('http') 
-        ? `<img src="${product.imagen}" alt="${product.nombre}" style="width: 250px; border-radius: 10px;" />`
+        ? `<img src="${product.imagen}" alt="${product.nombre}" style="border-radius: 10px;" />`
         : ''
       }
+      </div>
       <p><strong>Descripción:</strong> ${product.descripcion}</p>
       <p><strong>Precio:</strong> ${product.precio} €</p>
       <p><strong>Categoría:</strong> ${product.categoria}</p>
@@ -17,10 +17,10 @@ function tarjetaDelProducto(product, esAdmin = false) {
       ${esAdmin
         ? `
           <a href="/dashboard/${product._id}/editar">
-            <button class="btn-editar">Editar</button>
+            <button class="btn">Editar</button>
           </a>
           <form action="/dashboard/${product._id}/borrar?_method=DELETE" method="POST" style="display:inline;">
-            <button type="submit" class="btn">Eliminar</button>
+            <button class="btn" type="submit" >Eliminar</button>
           </form>
         `
         : `
@@ -33,6 +33,7 @@ function tarjetaDelProducto(product, esAdmin = false) {
       <div style="margin-top: 20px;">
         <a href="/products" class="btn" >Volver a la tienda</a>
       </div>
+    </div>  
   `;
 }
 

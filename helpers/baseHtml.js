@@ -67,29 +67,53 @@ function baseHtml(content, menu = '') {
 
        .grilla-productos {
         display: grid;
-        grid-template-columns: repeat(5, 1fr); /* 5 productos por fila */
+        grid-template-columns: repeat(5, 1fr); 
         gap: 20px;
         padding: 20px;
       }
 
       .carta-producto {
-        background-color: white;
+        background-color: rgba(252, 249, 248, 0.88);
         color: black;
         padding: 20px;
         border: 1px solid #ccc;
         text-align: center;
         border-radius: 5px;
+        line-height: 22px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 250px; 
+      }
+
+     .carta-producto .imagen-producto {
+       
+        display: flex;
+        align-items: start;
+        
       }
 
       .carta-producto img {
-        width: 100%;
-        height: 200px;
-        margin: -5px;
-        object-fit: cover;
-        border-radius: 5px;
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        border-radius: 10px;
+        padding: 7px;
       }
-
-      .btn, button {
+//^^^^^^^^^^^^^^^^^^^^^^NO TOCAR^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      
+      .grilla-productos .carta-producto {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;     
+        background-color: rgba(10, 42, 224, 0.9);
+        border-radius: 8px;
+        
+      }
+      
+      .btn {
+        display: inline-block;  
         background-color: #f84d00;
         color: white;
         padding: 8px 8px; 
@@ -99,13 +123,43 @@ function baseHtml(content, menu = '') {
         cursor: pointer;
         text-decoration: none;
         font-size: 1rem;
+        object-fit: contain;
+        transition: background-color 0.3s ease;
         
       }
       
-    
+      .boton {
+        display: inline-block; 
+        text-align: center;
+        justify-content: center;
+        background-color: #f84d00;
+        width: 74px;
+        color: white;
+        height: 34.67px;
+        padding: 8px 8px; 
+        border-radius: 5px;
+        margin-top: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        font-size: 1rem;
+        object-fit: contain;
+        transition: background-color 0.3s ease;
+      }
+      
+      .botones-acciones {
+        display: flex;
+        gap: 10px; 
+        justify-content: center; 
+        text-align: center;
+        align-items: center; 
+        margin-top: 8px;
+        }
 
-
-        @media (max-width: 1024px) {
+      .btn:hover {
+        background-color: #d93f00;  
+       }
+        
+      @media (max-width: 1024px) {
           .grilla-productos {
             grid-template-columns: repeat(3, 1fr);
           }

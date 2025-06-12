@@ -5,7 +5,7 @@ function protegerRuta(req, res, next) {
     return next();
   }
 
-  res.redirect('/login?error=2');
+  res.redirect('/login?error=1');
 }
 
 module.exports = protegerRuta;

@@ -13,9 +13,11 @@ function barraNavegacion(esAdmin = false) {
     `;
     } else {
       return `
+      <nav>
         <a href="/dashboard">Dashboard</a>
         <a href="/dashboard/nuevo">Nuevo producto</a>
         <a href="/products">Tienda</a>
+      </nav>
       `
     }
 }
