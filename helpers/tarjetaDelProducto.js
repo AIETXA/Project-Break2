@@ -1,6 +1,9 @@
 function tarjetaDelProducto(product, esAdmin = false) {
  return `
-   <div class="tarjetaProducto" style="text-align: center; margin: 2rem;">
+ <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+   <div class="tarjetaProducto" 
+    style="text-align: center; justify-content: center; height:500px; margin: 2rem; background-color:rgb(241, 229, 224);
+        width: 30%; ">
       <h1>${product.nombre}</h1>
       ${product.imagen && product.imagen.startsWith('http') 
         ? `<img src="${product.imagen}" alt="${product.nombre}" style="width: 250px; border-radius: 10px;" />`
@@ -14,10 +17,10 @@ function tarjetaDelProducto(product, esAdmin = false) {
       ${esAdmin
         ? `
           <a href="/dashboard/${product._id}/editar">
-            <button class="editar">Editar</button>
+            <button class="btn-editar">Editar</button>
           </a>
           <form action="/dashboard/${product._id}/borrar?_method=DELETE" method="POST" style="display:inline;">
-            <button type="submit" class="eliminar">Eliminar</button>
+            <button type="submit" class="btn">Eliminar</button>
           </form>
         `
         : `

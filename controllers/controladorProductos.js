@@ -7,7 +7,7 @@ const formProducto = require('../helpers/formProducto.js');
 const esRutaAdmin = require('../helpers/esRutaAdmin.js');
 const cloudinary = require('../config/cloudinaryConfig.js');
 const categorias = ['Camisetas', 'Sudaderas', 'Pantalones', 'Accesorios'];
-const talles = ['S', 'M', 'L', 'XL'];
+const talles = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 
 
 const controladorProductos = { 

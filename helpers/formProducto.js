@@ -4,7 +4,7 @@ function formProducto(product = {}, options = {}) {
     accion = '/dashboard/nuevo',
     botonText = 'Crear producto',
     categorias = ['Camisetas', 'Pantalones', 'Sudaderas', 'Accesorios'],
-    talles = ['S', 'M', 'L', 'XL'],
+    talles = ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
   } = options;
 
   return `

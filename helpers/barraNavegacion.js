@@ -3,7 +3,7 @@ function barraNavegacion(esAdmin = false) {
 
     return `
     <nav>
-      <a href="/products">Inicio</a>
+      <a class="inicio" href="/" >Inicio</a>
       <a href="/products?categoria=Camisetas">Camisetas</a>
       <a href="/products?categoria=Pantalones">Pantalones</a>
       <a href="/products?categoria=Sudaderas">Sudaderas</a>
