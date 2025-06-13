@@ -2,16 +2,18 @@
 
 const express = require('express');
 const app = express();
-require('dotenv').config();
 const PORT = process.env.PORT || 3000;
+require('dotenv').config();
 const { dbConnection } = require('./config/bbdd');
-const rutasProductos = require('./routes/rutasProductos');
-const rutasApi = require('./routes/rutasAPIproductos');
 const methodOverride = require('method-override');
 const session = require('express-session');
+const swaggerUi = require('swagger-ui-express');
+const docs = require('./docs/index');
+const rutasProductos = require('./routes/rutasProductos');
+const rutasApi = require('./routes/rutasAPIproductos');
 const rutasAuth = require('./routes/authRutas');
 const carritoRuta = require('./routes/carritoRuta');
-const routes = require('./routes/rutasProductos');
+
 
 
 
@@ -38,9 +40,7 @@ app.use('/', rutasAuth);
 app.use('/', rutasProductos);
 app.use('/api', rutasApi);
 app.use(carritoRuta);
-
-
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(docs))
 
 dbConnection();
 
