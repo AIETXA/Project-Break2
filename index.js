@@ -49,6 +49,14 @@ app.use('/', rutasProductos);
 
 dbConnection();
 
+app.get('/test', async (req, res) => {
+  console.log('🧪 RUTA TEST EJECUTADA');
+  const Product = require('./models/Product.js');
+  const productos = await Product.find();
+  console.log('🧪 Productos encontrados:', productos.length);
+  res.json({ total: productos.length, productos: productos.slice(0, 2) });
+});
+
 /*app.get('/', (req, res) => {
   res.redirect('/dashboard');
 });*/
