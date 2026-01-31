@@ -10,7 +10,7 @@ const rutasApi = require('./routes/rutasAPIproductos');
 const rutasAuth = require('./routes/authRutas');
 const carritoRuta = require('./routes/carritoRuta');
 const { dbConnection } = require('./config/bbdd');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 
 app.use(express.urlencoded({extended: true}));
@@ -29,7 +29,14 @@ app.use(methodOverride(function (req, res) {
 app.use(session({
   secret: process.env.SESSION_SECRET, 
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  /*store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URI
+    
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24
+  }*/
 }));
 
 app.use('/', rutasAuth);

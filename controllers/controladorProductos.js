@@ -17,9 +17,14 @@ const controladorProductos = {
       
       const categoria = req.query.categoria;
       const filtro = categoria ? { categoria } : {};
+       console.log('🔍 Filtro aplicado:', filtro);
       const productos = await Product.find(filtro);
+      console.log('🔍 Productos encontrados:', productos.length);
+      console.log('🔍 MONGO_URI existe:', !!process.env.MONGO_URI);
+      console.log('🔍 Primeros 2 productos:', JSON.stringify(productos.slice(0, 2)));
       const esAdmin = esRutaAdmin(req);
-      
+       
+
       const contenido = `
       <h2>Productos</h2>
       <div class="contenedor-grilla">
