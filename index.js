@@ -39,18 +39,20 @@ app.use(session({
   }*/
 }));
 
-app.use('/', rutasAuth);
-app.use('/', rutasProductos);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(docs))
 app.use('/api', rutasApi);
 app.use(carritoRuta);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(docs))
 
-
-app.get('/', (req, res) => {
-  res.redirect('/dashboard');
-});
+app.use('/', rutasAuth);
+app.use('/', rutasProductos);
 
 
 dbConnection();
+
+/*app.get('/', (req, res) => {
+  res.redirect('/dashboard');
+});*/
+
+
 
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`) );
